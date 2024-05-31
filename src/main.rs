@@ -10,7 +10,7 @@ fn main() {
 
     // Get base addresses of important classes. These should not change during the runtime of the program, only the values they contain.
     let local_player_addr = read_memory(handle, base_address + 0x18ac00);
-    let current_weapon_pointer = resolve_pointer(handle, vec![0x18ac00, 0x374, 0x10], base_address);
+    let current_weapon_pointer = resolve_pointer(handle, vec![0x18ac00, 0x374], base_address);
     let current_weapon_addr = read_memory(handle, current_weapon_pointer);
 
     println!("Local Player Address: {:#X}", local_player_addr);
@@ -35,6 +35,8 @@ fn main() {
         armor: local_player_addr + 0xf0,
         current_weapon: CurrentWeapon {
             base: current_weapon_addr,
+            weapon_stats: current_weapon_addr + 0x0C,
+            weapon_instance: current_weapon_addr + 0x10,
             ammo: current_weapon_addr + 0x24,
 
             reserve_ammo: current_weapon_addr + 0x0,

@@ -13,15 +13,6 @@ pub fn draw_ui(handle: HANDLE, mut cheats: Cheats, player: PlayerEnt) -> Result<
     eframe::run_simple_native("Assault Cube External v1.0", options, move |ctx, _frame| {
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.heading("Assault Cube External v1.0");
-            // Refill ammo
-            if
-                ui
-                    .button("Refill Ammo")
-                    .on_hover_text("Refills the current weapon's magazine")
-                    .clicked()
-            {
-                cheats.refill_ammo(handle, &player)
-            }
             // Infinite ammo patch
             if ui.checkbox(&mut cheats.infinite_ammo, "Infinite Ammo").clicked() {
                 println!("Infinite Ammo Toggled: {}" ,cheats.infinite_ammo);
@@ -31,6 +22,11 @@ pub fn draw_ui(handle: HANDLE, mut cheats: Cheats, player: PlayerEnt) -> Result<
             if ui.checkbox(&mut cheats.infinite_health, "Infinite Health").clicked() {
                 println!("Infinite Health Toggled: {}", cheats.infinite_health);
                 cheats.toggle_ininite_health(handle, cheats.infinite_health, &player);
+            }
+            // Recoil patch
+            if ui.checkbox(&mut cheats.no_recoil, "No Recoil").clicked() {
+                println!("No Recoil Toggled: {}", cheats.no_recoil);
+                cheats.disabled_recoil(handle, &player, cheats.no_recoil);
             }
         });
     })

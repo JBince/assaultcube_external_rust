@@ -9,6 +9,7 @@ pub struct Cheats {
     // To add: infinite health, infinite armor, infinite grenades, faster fire rate, no recoil, no spread.
     pub infinite_ammo: bool,
     pub infinite_health: bool,
+    pub no_recoil: bool,
 }
 
 impl Cheats {
@@ -16,6 +17,7 @@ impl Cheats {
         Self {
             infinite_ammo: false,
             infinite_health: false,
+            no_recoil: false,
         }
     }
     
@@ -41,6 +43,15 @@ impl Cheats {
             } else {
                 break;
             }
+        }
+    }
+
+    pub fn disabled_recoil(&self, handle: HANDLE, player: &PlayerEnt, disable_recoil: bool) {
+        let recoil_pointer = read_memory(handle, player.current_weapon.weapon_stats) + 0x60;
+        if disable_recoil {
+            write_memory(handle, &[0x00], recoil_pointer);
+        } else {
+            write_memory(handle, &[0x50], recoil_pointer);
         }
     }
 }

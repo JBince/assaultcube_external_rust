@@ -16,6 +16,8 @@ pub struct PlayerEnt{
 #[derive(Debug)]
 pub struct CurrentWeapon{
     pub base: u32,
+    pub weapon_stats: u32,
+    pub weapon_instance: u32,
     pub ammo: u32,
     pub reserve_ammo: u32,
 
