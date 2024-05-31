@@ -20,10 +20,6 @@ impl Cheats {
             no_recoil: false,
         }
     }
-    
-    pub fn refill_ammo(&self, handle: HANDLE, player: &PlayerEnt) {
-        write_memory(handle, &[0x64], player.current_weapon.ammo);
-    }
 
     pub fn toggle_infinite_ammo(&self, handle: HANDLE, infinite_ammo: bool) {
         if infinite_ammo {
