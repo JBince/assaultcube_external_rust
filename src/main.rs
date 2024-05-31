@@ -1,11 +1,11 @@
 use ac_external_v2::playerent::playerent::CurrentWeapon;
 use ac_external_v2::playerent::PlayerEnt;
 use ac_external_v2::utils::*;
-use eframe::egui;
-use std::result::Result;
+use ac_external_v2::cheats::Cheats;
+use ac_external_v2::ui::*;
 
-fn main() -> Result<(), eframe::Error> {
-    let handle = get_process_handle(12436);
+fn main() {
+    let handle = get_process_handle(32524);
     let base_address = 0x400000;
 
     // Get base addresses of important classes. These should not change during the runtime of the program, only the values they contain.
@@ -41,39 +41,8 @@ fn main() -> Result<(), eframe::Error> {
         },
     };
 
-    println!("Current Weapon Ammo: {}", read_memory(handle, player.current_weapon.ammo));
+    let mut cheats = Cheats::new();
 
-    // Examples
-
-    // Patch ammo decrementing. This is a single applied patch in memory.
-    // Decrementing the ammo value is done @ 0x4C73EF. Only a two byte instruction.
-    
-    // write_memory(handle, &[0x90; 2], 0x4C73EF);
-
-    // Continuously refill the current magazine ammo
-
-    // loop {
-    //     write_memory(handle, &[0x64], player.current_weapon.ammo);
-    //     sleep(duration::from_millis(100));
-    // }
-
-    // Using EGUI to create a simple program that adds additional toggleability to the cheats
-
-    let options = eframe::NativeOptions {
-        viewport: egui::ViewportBuilder::default().with_inner_size([320.0, 240.0]),
-        ..Default::default()
-    };
-
-    eframe::run_simple_native("Assault Cube External v1.0", options, move |ctx, _frame| {
-        egui::CentralPanel::default().show(ctx, |ui| {
-            ui.heading("Assault Cube External v1.0");
-            // if ui.button("Increment").clicked() {
-            //     age += 1;
-            // }
-            ui.label(format!("Ammo located @ {:#X}", player.current_weapon.ammo));
-            
-            // Figure out how to add checkbox to toggle features
-        });
-    })
+    draw_ui(handle, cheats, player).unwrap();
 
 }
