@@ -10,7 +10,8 @@ This is a pretty simple external trainer. It gives a player...
 * Disable recoil
 * Disable weapon spread
 * Maximum fire rate
-A use can configure these with a simple checkbox GUI.
+
+A user can configure these with a simple checkbox GUI.
 
 ### Usability
 It works pretty well, but is only meant as a proof of concept for game memory manipulation in Rust. This does not make an effort to bypass any anti cheat
