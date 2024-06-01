@@ -12,8 +12,6 @@ pub struct Cheats {
     pub infinite_health: bool,
     pub no_recoil: bool,
     pub no_spread: bool,
-    pub infinite_armor: bool,
-    pub infinite_grenades: bool,
     pub faster_fire_rate: bool,
 }
 
@@ -24,8 +22,6 @@ impl Cheats {
             infinite_health: false,
             no_recoil: false,
             no_spread: false,
-            infinite_armor: false,
-            infinite_grenades: false,
             faster_fire_rate: false,
         }
     }
@@ -38,19 +34,14 @@ impl Cheats {
         }
     }
 
-    // It starts a loop that modifies that specific players health, rather than patching the damange function. This works
-    // in single and multiplayer. This obviously will need a new thread to do this, and work with other cheats, otherwise it cannot be disabled.
-    // That thread will need to check if infinite_health is false, and then break the loop and exit.
+    // Write patch to negate damage function
     pub fn toggle_ininite_health(&self, handle: HANDLE, infinite_health: bool, player: &PlayerEnt) {
-        thread::spawn(move || loop {
-            if infinite_health {
-                println!("Infinite health is enabled!")
-            } else {
-                print!("Infinite health has been disabled");
-                break;
-            }
-            sleep(duration::from_millis(100));
-        });
+        if infinite_health {
+            write_memory(handle, &[0x90;3], 0x41c223);
+        } else {
+            write_memory(handle, &[0x29, 0x73, 0x04], 0x41c223);
+        }
+        sleep(duration::from_millis(100));
     }
 
     pub fn disabled_recoil(&self, handle: HANDLE, player: &PlayerEnt, disable_recoil: bool) {
@@ -59,14 +50,6 @@ impl Cheats {
             write_memory(handle, &[0x00], recoil_pointer);
         } else {
             write_memory(handle, &[0x50], recoil_pointer);
-        }
-    }
-
-    pub fn infinite_grenades(&self, handle: HANDLE, infinite_grenades: bool) {
-        if infinite_grenades {
-            write_memory(handle, &[0x90; 2], 0x4C73EF);
-        } else {
-            write_memory(handle, &[0xFF, 0x08], 0x4C73EF);
         }
     }
 
