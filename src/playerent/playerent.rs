@@ -59,9 +59,4 @@ Current Weapon Reserve Ammo Pointer:
 Recoil Value Pointer
 [[[[ac_client.exe + 0x18AC00] + 0x374] + 0xC] + 0x60]
 
-
-// Should instantiate a struct that gets and modifies that stats of the weapon.
-These values may be stored statically in memory, rather than dynamically generated (I.e. the way ammo is)
-May need to periodically recheck it when you change weapons. 
-
 */

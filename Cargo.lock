@@ -19,15 +19,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c71b1793ee61086797f5c80b6efa2b8ffa6d5dd703f118545808a7f2e27f7046"
 
 [[package]]
-name = "ac_external_v2"
-version = "0.1.0"
-dependencies = [
- "eframe",
- "egui",
- "winapi",
-]
-
-[[package]]
 name = "accesskit"
 version = "0.12.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -208,6 +199,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "39e9c3835d686b0a6084ab4234fcd1b07dbf6e4767dce60874b12356a25ecd4a"
 dependencies = [
  "libloading 0.7.4",
+]
+
+[[package]]
+name = "assaultcube_external"
+version = "0.1.0"
+dependencies = [
+ "eframe",
+ "egui",
+ "winapi",
 ]
 
 [[package]]

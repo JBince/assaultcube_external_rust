@@ -1,11 +1,11 @@
-use ac_external_v2::playerent::playerent::CurrentWeapon;
-use ac_external_v2::playerent::PlayerEnt;
-use ac_external_v2::utils::*;
-use ac_external_v2::cheats::Cheats;
-use ac_external_v2::ui::*;
+use assaultcube_external::playerent::playerent::CurrentWeapon;
+use assaultcube_external::playerent::PlayerEnt;
+use assaultcube_external::utils::*;
+use assaultcube_external::cheats::Cheats;
+use assaultcube_external::ui::*;
 
 fn main() {
-    let handle = get_process_handle(32524);
+    let handle = get_process_handle(16992);
     let base_address = 0x400000;
 
     // Get base addresses of important classes. These should not change during the runtime of the program, only the values they contain.
@@ -43,8 +43,10 @@ fn main() {
         },
     };
 
-    let mut cheats = Cheats::new();
+    // Instantiate cheat struct with all cheats turned off
+    let cheats = Cheats::new();
 
+    // Start the UI
     draw_ui(handle, cheats, player).unwrap();
 
 }
