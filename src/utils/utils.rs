@@ -3,6 +3,7 @@ use winapi::um::processthreadsapi::OpenProcess;
 use winapi::um::winnt::HANDLE;
 use winapi::um::winnt::PROCESS_ALL_ACCESS;
 use winapi::shared::minwindef::{ LPVOID, LPCVOID };
+use std::sync::Arc;
 
 // Gets the handle of a process from a PID
 pub fn get_process_handle(pid: u32) -> HANDLE {

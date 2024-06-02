@@ -5,7 +5,7 @@ use assaultcube_external::cheats::Cheats;
 use assaultcube_external::ui::*;
 
 fn main() {
-    let handle = get_process_handle(4292);
+    let handle = get_process_handle(11660);
     let base_address = 0x400000;
 
     // Get base addresses of important classes. These should not change during the runtime of the program, only the values they contain.
