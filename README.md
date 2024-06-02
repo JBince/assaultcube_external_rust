@@ -1,4 +1,4 @@
-# An external trainer for Assault Cube written in Rust, based on GuidedHacking
+# An external trainer for Assault Cube written in Rust, based on GuidedHacking (Work in Progress)
 
 ### Why Rust?
 I like Rust and I haven't seen it done before.
